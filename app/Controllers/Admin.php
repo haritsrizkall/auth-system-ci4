@@ -10,7 +10,7 @@ class Admin extends BaseController
 	{
 		$menuModel = new MenuModel();
 		$data = [
-			'menu' => $menuModel->getMenu($this->session->get('role_id'))
+			'menu' => $menuModel->getMenuByRole($this->session->get('role_id'))
 		];
 		return view('dashboard/dashboard', $data);
 

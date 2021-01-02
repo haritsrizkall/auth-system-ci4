@@ -129,4 +129,9 @@ class Auth extends BaseController
 
         $this->session->set($userLogIn);
     }
+
+    public function blocked()
+    {
+        return view('auth/blocked');
+    }
 }
