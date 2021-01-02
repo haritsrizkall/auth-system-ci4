@@ -38,7 +38,7 @@
                             <div class="text-center">
                                 <h1 class="h4 text-gray-900 mb-4">Create an Account!</h1>
                             </div>
-                            <form action="<?= base_url('auth/register'); ?>" method="POST" class="user">
+                            <form method="POST" class="user">
                                 <div class="form-group">
                                     <input type="text" class="form-control form-control-user <?= ($validation->hasError('name')) ? 'is-invalid' : '' ?>" id="name" name="name" placeholder="Full Name" value="<?= old('name'); ?>">
                                     <div class="invalid-feedback">

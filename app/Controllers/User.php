@@ -13,6 +13,7 @@ class User extends BaseController
             'menu' => $menuModel->getMenu($this->session->get('role_id'))
         ];
 
+        return view('dashboard/dashboard', $data);
 
         // if ($this->session->get('id')) {
         //     return view('dashboard/dashboard', $data);

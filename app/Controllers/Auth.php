@@ -66,41 +66,41 @@ class Auth extends BaseController
     public function register()
     {
 
-        $userModel = new UserModel();
-
         if ($this->request->getMethod() == 'post') {
+            $userModel = new UserModel();
+
             $rules = [
                 'name' => 'required',
                 'email' => 'required|is_unique[users.email]|valid_email',
                 'password1' => 'required|min_length[8]',
                 'password2' => 'required|min_length[8]|matches[password1]',
-                'lomba' => 'required'
             ];
 
             if (!$this->validate($rules)) {
                 $validation =  \Config\Services::validation();
                 return redirect()->back()->withInput()->with('validation', $validation);
-            } else {
-                $inputUser = [
-                    'name' => htmlspecialchars($this->request->getPost('name')),
-                    'email' => htmlspecialchars($this->request->getPost('email')),
-                    'password' => password_hash($this->request->getPost('password1'), PASSWORD_DEFAULT),
-                    'image' => 'default.jpg',
-                    'role_id' => 2,
-                    'is_active' => 1,
-                    'created_at' => time()
-                ];
+            }
 
-                $userModel->save($inputUser);
-                $this->session->setFlashdata('success', '<div class="alert alert-success alert-dismissible fade show" role="alert">
+            $inputUser = [
+                'name' => htmlspecialchars($this->request->getPost('name')),
+                'email' => htmlspecialchars($this->request->getPost('email')),
+                'password' => password_hash($this->request->getPost('password1'), PASSWORD_DEFAULT),
+                'image' => 'default.jpg',
+                'role_id' => 2,
+                'is_active' => 1,
+                'created_at' => time()
+            ];
+
+            $userModel->save($inputUser);
+
+            $this->session->setFlashdata('success', '<div class="alert alert-success alert-dismissible fade show" role="alert">
                 Registration success. Please activate your account.
                 <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                   <span aria-hidden="true">&times;</span>
                 </button>
               </div>');
 
-                return redirect()->to('/auth');
-            }
+            return redirect()->to('/auth');
         };
 
         $data = [
